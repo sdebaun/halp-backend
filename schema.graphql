@@ -93,4 +93,12 @@ type Mutation {
   addProjectDetail(projectId: String!, text: String!): Detail
 
   deleteProjectDetail(id: String!): String
+
+  updateProjectDetail(id: String!, text: String!): Detail
+
+  #addProjectSentPerson(projectId: String!, name: String!, email: String): SentPerson
+
+  #deleteProjectSentPerson(id: String!): String
+
+  #updateStateProjectSentPerson(id: String!, state: String!): SentPerson
 }

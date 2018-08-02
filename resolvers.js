@@ -108,6 +108,13 @@ const resolvers = {
         .remove({id})
         .write()
       return id
+    },
+    updateProjectDetail: (parent, args, {db}, info) => {
+      db.get('projectDetails')
+        .find({id: args.id})
+        .assign(args)
+        .write()
+        return db.get('projectDetails').find({id: args.id}).value()
     }
   }
 }
