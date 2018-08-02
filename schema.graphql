@@ -1,0 +1,12 @@
+type Project {
+  id: String!
+  name: String!
+}
+
+type Query {
+  project(id: String!): Project
+  projectsAll: [Project]
+  projectsActive: [Project]
+  projectsOld: [Project]
+  projectsClosed: [Project]
+}
