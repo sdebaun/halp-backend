@@ -72,6 +72,19 @@ const resolvers = {
         .assign(args)
         .write()
         return db.get('projects').find({id: args.id}).value()
+    },
+    addProjectDetail: (parent, args, {db}, info) => {
+      const id = shortid.generate()
+      db.get('projectDetails')
+        .push({id, ...args})
+        .write()
+      return db.get('projectDetails').find({id}).value()
+    },
+    deleteProjectDetail: (parent, {id}, {db}, info) => {
+      db.get('projectDetails')
+        .remove({id})
+        .write()
+      return id
     }
   }
 }

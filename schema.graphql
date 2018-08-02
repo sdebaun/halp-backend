@@ -87,4 +87,8 @@ type Mutation {
     contactName: String,
     sentPersonsNeeded: Int,
   ): Project
+
+  addProjectDetail(projectId: String!, text: String!): Detail
+
+  deleteProjectDetail(id: String!): String
 }
