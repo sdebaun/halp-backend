@@ -73,6 +73,8 @@ type Mutation {
     sentPersonsNeeded: Int!,
   ): Project
 
+  copyProject(id: String!): Project
+
   deleteProject(id: String!): String
 
   updateProject(

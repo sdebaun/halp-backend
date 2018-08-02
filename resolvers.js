@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import shortid from 'shortid'
+import { DH_NOT_SUITABLE_GENERATOR } from 'constants';
 
 const resolverFor = (collName, query) =>
   (parent, args, {db}, info) => query(db.get(collName), args).value()
@@ -59,6 +60,22 @@ const resolvers = {
         .push({id, state: 'active', ...args})
         .write()
       return db.get('projects').find({id}).value()
+    },
+    copyProject: (parent, {id}, {db}, info) => {
+      const project = db.get('projects').find({id}).value()
+      const details = db.get('projectDetails').filter({projectId: id}).value()
+      const newId = shortid.generate()
+      db.get('projects')
+        .push({...project, title: `Copy of ${project.title}`, id: newId, state: 'active'})
+        .write()
+      details.forEach(detail => {
+        const newDetailId = shortid.generate()
+        db.get('projectDetails')
+          .push({...detail, id: newDetailId, projectId: newId})
+          .write()
+      });
+      // db.write()
+      return db.get('projects').find({id: newId}).value()
     },
     deleteProject: (parent, {id}, {db}, info) => {
       db.get('projects')

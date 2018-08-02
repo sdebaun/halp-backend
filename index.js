@@ -11,7 +11,7 @@ const server = new ApolloServer({
   resolvers,
   context,
   formatResponse: r => {
-    console.log(r)
+    console.log(JSON.stringify(r, null, 2))
     return r
   },
   formatError: e => {
