@@ -1,9 +1,5 @@
 import _ from 'lodash'
 import shortid from 'shortid'
-import { DH_NOT_SUITABLE_GENERATOR } from 'constants';
-
-const resolverFor = (collName, query) =>
-  (parent, args, {db}, info) => query(db.get(collName), args).value()
 
 const DEFAULT_SENTPERSON_COUNTS = {
   sent: 0,
@@ -74,7 +70,6 @@ const resolvers = {
           .push({...detail, id: newDetailId, projectId: newId})
           .write()
       });
-      // db.write()
       return db.get('projects').find({id: newId}).value()
     },
     deleteProject: (parent, {id}, {db}, info) => {
