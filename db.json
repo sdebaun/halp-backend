@@ -2,14 +2,112 @@
   "projects": [
     {
       "id": "1",
-      "name": "Foo"
+      "sourceGroup": "Temple Guardians",
+      "title": "Defend the Temple",
+      "pitch": "Help defend the temple against invasion by evil space aliens that want to steal our pants.",
+      "needStart": "1974-10-25T10:00",
+      "needEnd": "1974-10-25T16:00",
+      "state": "active",
+      "contactMethod": "SCHEDULE",
+      "contactAddress": "4 & E",
+      "contactName": "Bob Dobbs",
+      "sentPersonsNeeded": 10
     },
     {
       "id": "2",
-      "name": "Bar"
+      "sourceGroup": "Medusa Madness",
+      "title": "Building Medusa-Proof Bunkers",
+      "pitch": "Nobody wants to get caught out in the open when the Medusa comes around!",
+      "needStart": "1974-10-25T10:00",
+      "needEnd": "1974-10-26T16:00",
+      "state": "closed",
+      "contactMethod": "WALKUP",
+      "contactAddress": "4 & E",
+      "contactName": "Bob Dobbs",
+      "sentPersonsNeeded": 5
+    },
+    {
+      "id": "3",
+      "sourceGroup": "Full Circle Tea House",
+      "title": "Pour a Round of Tea or Two",
+      "pitch": "Come pour tea because that is so much fun you can\"t even believe it!",
+      "needStart": "1974-10-25T10:00",
+      "needEnd": "1974-10-26T16:00",
+      "state": "old",
+      "sentPersonsNeeded": 4,
+      "contactMethod": "WALKUP",
+      "contactAddress": "4 & E",
+      "contactName": "Bob Dobbs"
+    },
+    {
+      "id": "5MH2WH9Ge",
+      "title": "A new Project!!!!???",
+      "pitch": "Do it!!!",
+      "state": "active",
+      "sourceGroup": "asdfasdf!!!!",
+      "needStart": "1974-10-25T10:00",
+      "needEnd": "1974-10-25T12:00",
+      "contactMethod": "walkup",
+      "contactAddress": "4th and Q",
+      "contactName": "george",
+      "sentPersonsNeeded": 2
+    },
+    {
+      "id": "lpXXH2uk3",
+      "state": "active",
+      "title": "Copy of A new Project!!!!???",
+      "pitch": "Do it!!!",
+      "sourceGroup": "asdfasdf!!!!",
+      "needStart": "1974-10-25T10:00",
+      "needEnd": "1974-10-25T12:00",
+      "contactMethod": "walkup",
+      "contactAddress": "4th and Q",
+      "contactName": "george",
+      "sentPersonsNeeded": 30
     }
   ],
   "users": [],
-  "projectDetails": [],
-  "projectSentPeoples": []
+  "projectDetails": [
+    {
+      "id": "1",
+      "projectId": "1",
+      "text": "A Laser Gun"
+    },
+    {
+      "id": "2",
+      "projectId": "1",
+      "text": "An Indominatble Will"
+    },
+    {
+      "id": "3",
+      "projectId": "1",
+      "text": "No wankers!!!"
+    }
+  ],
+  "projectSentPersons": [
+    {
+      "id": "1",
+      "projectId": "1",
+      "state": "sent",
+      "name": "Alice"
+    },
+    {
+      "id": "1",
+      "projectId": "1",
+      "state": "noshow",
+      "name": "Bob"
+    },
+    {
+      "id": "1",
+      "projectId": "1",
+      "state": "sent",
+      "name": "Carol"
+    },
+    {
+      "id": "1",
+      "projectId": "1",
+      "state": "confirmed",
+      "name": "Dave"
+    }
+  ]
 }

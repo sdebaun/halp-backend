@@ -1,12 +1,90 @@
-type Project {
+type Detail {
+  id: String!
+  text: String!
+}
+
+enum SentPersonState {
+  sent
+  confirmed
+  noshow
+}
+
+type SentPerson {
   id: String!
   name: String!
+  email: String
+  state: SentPersonState!
+}
+
+type SentPersonsCounts {
+  sent: Int
+  confirmed: Int
+  noshow: Int
+}
+
+enum ProjectState {
+  active
+  closed
+  old
+}
+
+type Project {
+  id: ID!
+  title: String!
+  sourceGroup: String!
+  pitch: String!
+  needStart: String!
+  needEnd: String!
+  state: ProjectState!
+  contactMethod: String!
+  contactAddress: String!
+  contactName: String!
+  details: [Detail]
+  sentPersons: [SentPerson]
+  sentPersonsNeeded: Int
+  sentPersonCounts: SentPersonsCounts!
+}
+
+type ProjectCounts {
+  active: Int
+  closed: Int
+  old: Int
 }
 
 type Query {
-  project(id: String!): Project
+  getProject(id: String!): Project
   projectsAll: [Project]
   projectsActive: [Project]
   projectsOld: [Project]
   projectsClosed: [Project]
+  projectCounts: ProjectCounts!
+}
+
+type Mutation {
+  createProject(
+    title: String!,
+    pitch: String!,
+    sourceGroup: String!,
+    needStart: String!,
+    needEnd: String!,
+    contactMethod: String!,
+    contactAddress: String!,
+    contactName: String!,
+    sentPersonsNeeded: Int!,
+  ): Project
+
+  deleteProject(id: String!): String
+
+  updateProject(
+    id: String!,
+    title: String,
+    pitch: String,
+    sourceGroup: String,
+    needStart: String,
+    needEnd: String,
+    contactMethod: String,
+    contactAddress: String,
+    contactName: String,
+    sentPersonsNeeded: Int,
+  ): Project
 }

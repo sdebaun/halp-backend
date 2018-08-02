@@ -5,7 +5,7 @@ const DEFAULTS = {
   projects: [],
   users: [],
   projectDetails: [],
-  projectSentPeoples: [],
+  projectSentPersons: [],
 }
 
 const DB_FILE_NAME = 'db.json'
