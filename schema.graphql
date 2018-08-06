@@ -21,6 +21,11 @@ type SentPersonsCounts {
   confirmed: Int
   noshow: Int
 }
+type SentPersonLists {
+  sent: [SentPerson]!
+  confirmed: [SentPerson]!
+  noshow: [SentPerson]!
+}
 
 enum ProjectState {
   active
@@ -40,7 +45,7 @@ type Project {
   contactAddress: String!
   contactName: String!
   details: [Detail]
-  sentPersons: [SentPerson]
+  sentPersons: SentPersonLists!
   sentPersonsNeeded: Int
   sentPersonCounts: SentPersonsCounts!
 }
@@ -96,9 +101,9 @@ type Mutation {
 
   updateProjectDetail(id: String!, text: String!): Detail
 
-  #addProjectSentPerson(projectId: String!, name: String!, email: String): SentPerson
+  addProjectSentPerson(projectId: String!, name: String!, email: String): SentPerson
 
-  #deleteProjectSentPerson(id: String!): String
+  deleteProjectSentPerson(id: String!): String
 
-  #updateStateProjectSentPerson(id: String!, state: String!): SentPerson
+  updateProjectSentPerson(id: String!, state: String!): SentPerson
 }

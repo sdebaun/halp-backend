@@ -27,8 +27,15 @@ const resolvers = {
   Query: {
     getProject: (parent, {id}, {db}, info) => {
       const project = db.get('projects').find({id}).value()
-      const sentPersons = db.get('projectSentPersons').filter({projectId: id}).value()
-      const sentPersonCounts = _.countBy(sentPersons, 'state')
+      const sentPersonsAll = db.get('projectSentPersons')
+        .filter({projectId: id})
+        .sortBy(o => o.name)
+      const sentPersons = {
+        sent: sentPersonsAll.filter({state: 'sent'}).value(),
+        confirmed: sentPersonsAll.filter({state: 'confirmed'}).value(),
+        noshow: sentPersonsAll.filter({state: 'noshow'}).value()
+      }
+      const sentPersonCounts = _.countBy(sentPersonsAll.value(), 'state')
       const details = db.get('projectDetails').filter({projectId: id}).value()
       return {
         ...project,
@@ -41,7 +48,12 @@ const resolvers = {
       return db.get('projects').value()
     },
     projectsActive: (parent, args, {db}, info) => {
-      return db.get('projects').filter({state: 'active'}).value().map(countsFor(db))
+      return db.get('projects')
+        .filter({state: 'active'})
+        .sortBy(o => o.needStart)
+        .reverse()
+        .value()
+        .map(countsFor(db))
     },
     projectCounts: (parent, args, {db}, info) => {
       const projects = db.get('projects').value()
@@ -110,7 +122,27 @@ const resolvers = {
         .assign(args)
         .write()
         return db.get('projectDetails').find({id: args.id}).value()
-    }
+    },
+    addProjectSentPerson: (parent, args, {db}, info) => {
+      const id = shortid.generate()
+      db.get('projectSentPersons')
+        .push({id, ...args, state: 'sent'})
+        .write()
+      return db.get('projectSentPersons').find({id}).value()
+    },
+    deleteProjectSentPerson: (parent, {id}, {db}, info) => {
+      db.get('projectSentPersons')
+        .remove({id})
+        .write()
+      return id
+    },
+    updateProjectSentPerson: (parent, {id, state}, {db}, info) => {
+      db.get('projectSentPersons')
+        .find({id})
+        .assign({state})
+        .write()
+      return db.get('projectSentPersons').find({id}).value()
+    },
   }
 }
 
