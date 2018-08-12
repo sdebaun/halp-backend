@@ -23,6 +23,15 @@ const countsFor = db => project => {
   }
 }
 
+const detailsFor = db => project => {
+  const details = db.get('projectDetails')
+    .filter({projectId: project.id}).value();
+  return {
+    ...project,
+    details,
+  }
+}
+
 const resolvers = {
   Query: {
     getProject: (parent, {id}, {db}, info) => {
@@ -54,6 +63,7 @@ const resolvers = {
         .reverse()
         .value()
         .map(countsFor(db))
+        .map(detailsFor(db))
     },
     projectCounts: (parent, args, {db}, info) => {
       const projects = db.get('projects').value()

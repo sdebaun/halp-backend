@@ -40,20 +40,20 @@
       "contactName": "Bob Dobbs"
     },
     {
-      "id": "J-JuRFHNv",
+      "id": "zK3jLOIRF",
       "sourceGroup": "Temple Guardians",
-      "title": "Copy of Defend the Temple",
+      "title": "Defend the Temple",
       "pitch": "Help defend the temple against invasion by evil space aliens that want to steal our pants.",
       "needStart": "1974-10-25T10:00",
       "needEnd": "1974-10-25T16:00",
       "state": "active",
-      "contactMethod": "SCHEDULE",
+      "contactMethod": "WALKUP",
       "contactAddress": "4 & E",
       "contactName": "Bob Dobbs",
       "sentPersonsNeeded": 5
     },
     {
-      "id": "zK3jLOIRF",
+      "id": "jY8Y9_n0l",
       "sourceGroup": "Temple Guardians",
       "title": "Copy of Defend the Temple",
       "pitch": "Help defend the temple against invasion by evil space aliens that want to steal our pants.",
@@ -79,16 +79,6 @@
       "text": "Pants"
     },
     {
-      "id": "Girp8oCKFD",
-      "projectId": "J-JuRFHNv",
-      "text": "A Laser Gun!!!"
-    },
-    {
-      "id": "R3A_tIgG_L",
-      "projectId": "J-JuRFHNv",
-      "text": "An Indominatble Will!!!!"
-    },
-    {
       "id": "3xXOh44FN",
       "projectId": "1",
       "text": "saasdadasd"
@@ -104,8 +94,18 @@
       "text": "Pants"
     },
     {
-      "id": "fdcqM9S2Y0",
-      "projectId": "zK3jLOIRF",
+      "id": "B_Y5vsgjjX",
+      "projectId": "jY8Y9_n0l",
+      "text": "An Indominatble Will"
+    },
+    {
+      "id": "zZdaSd2tnj",
+      "projectId": "jY8Y9_n0l",
+      "text": "Pants"
+    },
+    {
+      "id": "ha_dYBK6B9",
+      "projectId": "jY8Y9_n0l",
       "text": "saasdadasd"
     }
   ],
@@ -113,13 +113,13 @@
     {
       "id": "1",
       "projectId": "1",
-      "state": "noshow",
+      "state": "confirmed",
       "name": "Alice"
     },
     {
       "id": "2",
       "projectId": "1",
-      "state": "noshow",
+      "state": "confirmed",
       "name": "Bob"
     },
     {
@@ -163,41 +163,6 @@
       "state": "confirmed"
     },
     {
-      "id": "pIUnfojgm",
-      "projectId": "J-JuRFHNv",
-      "name": "aasdfasdf",
-      "email": "",
-      "state": "confirmed"
-    },
-    {
-      "id": "9jvS6cHi4",
-      "projectId": "J-JuRFHNv",
-      "name": "asdfasdf",
-      "email": "",
-      "state": "confirmed"
-    },
-    {
-      "id": "NnyA28lDT",
-      "projectId": "J-JuRFHNv",
-      "name": "zeke",
-      "email": "",
-      "state": "sent"
-    },
-    {
-      "id": "n-gNHjf1o",
-      "projectId": "J-JuRFHNv",
-      "name": "bob",
-      "email": "",
-      "state": "confirmed"
-    },
-    {
-      "id": "2pzgxmxkT",
-      "projectId": "J-JuRFHNv",
-      "name": "bob",
-      "email": "bob@bob.com",
-      "state": "noshow"
-    },
-    {
       "id": "HXUcHe2jz",
       "projectId": "1",
       "name": "deadpool",
@@ -210,6 +175,20 @@
       "name": "wat",
       "email": "",
       "state": "sent"
+    },
+    {
+      "id": "O-HT7GowF",
+      "projectId": "1",
+      "name": "bob",
+      "email": "",
+      "state": "confirmed"
+    },
+    {
+      "id": "hCPT1fmES",
+      "projectId": "zK3jLOIRF",
+      "name": "deadpool",
+      "email": "",
+      "state": "confirmed"
     }
   ]
 }
