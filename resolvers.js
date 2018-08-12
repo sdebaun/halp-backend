@@ -32,6 +32,20 @@ const detailsFor = db => project => {
   }
 }
 
+const scoreFor = db => project => {
+  const sentPersonsScore = sentPercentScore(project)
+  return {
+    ...project,
+    sentPersonsScore
+  }
+}
+
+const sentEquivalentFor = ({sent, confirmed, noshow}) =>
+  (sent * 0.5) + (confirmed * 1.0) + (noshow * 0.25)
+
+const sentPercentScore = ({sentPersonsNeeded, sentPersonCounts}) =>
+  sentEquivalentFor(sentPersonCounts) / sentPersonsNeeded
+
 const resolvers = {
   Query: {
     getProject: (parent, {id}, {db}, info) => {
@@ -39,17 +53,21 @@ const resolvers = {
       const sentPersonsAll = db.get('projectSentPersons')
         .filter({projectId: id})
         .sortBy(o => o.name)
+      const sentPersonsCount = sentPersonsAll.length
       const sentPersons = {
         sent: sentPersonsAll.filter({state: 'sent'}).value(),
         confirmed: sentPersonsAll.filter({state: 'confirmed'}).value(),
         noshow: sentPersonsAll.filter({state: 'noshow'}).value()
       }
       const sentPersonCounts = _.countBy(sentPersonsAll.value(), 'state')
+      const sentPersonsScore = sentPercentScore({sentPersonsNeeded: project.sentPersonsNeeded, sentPersonCounts})
       const details = db.get('projectDetails').filter({projectId: id}).value()
       return {
         ...project,
         details,
         sentPersons,
+        sentPersonsCount,
+        sentPersonsScore,
         sentPersonCounts: {...DEFAULT_SENTPERSON_COUNTS, ...sentPersonCounts},
       }
     },
@@ -64,6 +82,7 @@ const resolvers = {
         .value()
         .map(countsFor(db))
         .map(detailsFor(db))
+        .map(scoreFor(db))
     },
     projectCounts: (parent, args, {db}, info) => {
       const projects = db.get('projects').value()

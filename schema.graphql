@@ -48,6 +48,8 @@ type Project {
   sentPersons: SentPersonLists!
   sentPersonsNeeded: Int
   sentPersonCounts: SentPersonsCounts!
+  sentPersonsScore: Float
+  sentPersonsCount: Int
 }
 
 type ProjectCounts {
