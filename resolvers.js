@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import shortid from 'shortid'
+import moment from 'moment'
 
 const DEFAULT_SENTPERSON_COUNTS = {
   sent: 0,
@@ -46,6 +47,16 @@ const sentEquivalentFor = ({sent, confirmed, noshow}) =>
 const sentPercentScore = ({sentPersonsNeeded, sentPersonCounts}) =>
   sentEquivalentFor(sentPersonCounts) / sentPersonsNeeded
 
+const projectsByState = (db, state) =>
+  db.get('projects')
+    .filter({state})
+    .sortBy(o => o.needStart)
+    .reverse()
+    .value()
+    .map(countsFor(db))
+    .map(detailsFor(db))
+    .map(scoreFor(db))
+    
 const resolvers = {
   Query: {
     getProject: (parent, {id}, {db}, info) => {
@@ -75,14 +86,7 @@ const resolvers = {
       return db.get('projects').value()
     },
     projectsActive: (parent, args, {db}, info) => {
-      return db.get('projects')
-        .filter({state: 'active'})
-        .sortBy(o => o.needStart)
-        .reverse()
-        .value()
-        .map(countsFor(db))
-        .map(detailsFor(db))
-        .map(scoreFor(db))
+      return projectsByState('active')
     },
     projectCounts: (parent, args, {db}, info) => {
       const projects = db.get('projects').value()
@@ -155,7 +159,7 @@ const resolvers = {
     addProjectSentPerson: (parent, args, {db}, info) => {
       const id = shortid.generate()
       db.get('projectSentPersons')
-        .push({id, ...args, state: 'sent'})
+        .push({id, ...args, createdAt: moment()})
         .write()
       return db.get('projectSentPersons').find({id}).value()
     },
