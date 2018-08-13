@@ -63,6 +63,7 @@ type ProjectCounts {
 type Query {
   getProject(id: String!): Project
   projectsAll: [Project]
+  projectsByState(state: String!): [Project]
   projectsActive: [Project]
   projectsOld: [Project]
   projectsClosed: [Project]

@@ -86,7 +86,10 @@ const resolvers = {
       return db.get('projects').value()
     },
     projectsActive: (parent, args, {db}, info) => {
-      return projectsByState('active')
+      return projectsByState(db, 'active')
+    },
+    projectsByState: (parent, {state}, {db}, info) => {
+      return projectsByState(db, state)
     },
     projectCounts: (parent, args, {db}, info) => {
       const projects = db.get('projects').value()
