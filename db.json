@@ -1,166 +1,125 @@
 {
   "projects": [
     {
-      "id": "1",
-      "sourceGroup": "Temple Guardians",
-      "title": "Defend the Temple Needs 3",
-      "pitch": "Help defend the temple against invasion by evil space aliens that want to steal our pants.",
-      "needStart": "2020-10-25T10:00",
-      "needEnd": "2020-10-25T16:00",
+      "id": "PWAuSiyP3",
       "state": "active",
+      "title": "Light the Lamps",
+      "pitch": "Come out with all us hoopy froods in a ceremony of illumination.",
+      "sourceGroup": "Lamplighters",
+      "needStart": "2018-08-15T18:00",
+      "needEnd": "2018-08-15T20:00",
       "contactMethod": "WALKUP",
-      "contactAddress": "4 & E",
-      "contactName": "Bob Dobbs",
-      "sentPersonsNeeded": 5
+      "contactAddress": "Lamplighters HQ 4th and E",
+      "contactName": "Snotto",
+      "sentPersonsNeeded": 200
     },
     {
-      "id": "2",
-      "sourceGroup": "Medusa Madness",
-      "title": "Building Medusa-Proof Bunkers",
-      "pitch": "Nobody wants to get caught out in the open when the Medusa comes around!",
-      "needStart": "1974-10-25T10:00",
-      "needEnd": "1974-10-26T16:00",
-      "state": "closed",
-      "contactMethod": "WALKUP",
-      "contactAddress": "4 & E",
-      "contactName": "Bob Dobbs",
-      "sentPersonsNeeded": 5
-    },
-    {
-      "id": "3",
-      "sourceGroup": "Full Circle Tea House",
-      "title": "Pour a Round of Tea or Two",
-      "pitch": "Come pour tea because that is so much fun you can\"t even believe it!",
-      "needStart": "1974-10-25T10:00",
-      "needEnd": "1974-10-26T16:00",
-      "state": "old",
-      "sentPersonsNeeded": 4,
-      "contactMethod": "WALKUP",
-      "contactAddress": "4 & E",
-      "contactName": "Bob Dobbs"
-    },
-    {
-      "id": "zK3jLOIRF",
-      "sourceGroup": "Temple Guardians",
-      "title": "Well-Stocked Defend the Temple",
-      "pitch": "Help defend the temple against invasion by evil space aliens that want to steal our pants.",
-      "needStart": "1974-10-25T10:00",
-      "needEnd": "1974-10-25T16:00",
+      "id": "0ICGHjajI",
       "state": "active",
-      "contactMethod": "WALKUP",
-      "contactAddress": "4 & E",
-      "contactName": "Bob Dobbs",
-      "sentPersonsNeeded": 5
-    },
-    {
-      "id": "jY8Y9_n0l",
+      "title": "Guard The Temple",
+      "pitch": "Defend the temple against hordes of evil bug-eyed aliens bent on destroying our way of life.",
       "sourceGroup": "Temple Guardians",
-      "title": "Copy of Defend the Temple",
-      "pitch": "Help defend the temple against invasion by evil space aliens that want to steal our pants.",
-      "needStart": "1974-10-25T10:00",
-      "needEnd": "1974-10-25T16:00",
-      "state": "active",
+      "needStart": "2018-08-14T08:00",
+      "needEnd": "2018-08-16T12:00",
       "contactMethod": "SCHEDULE",
-      "contactAddress": "4 & E",
-      "contactName": "Bob Dobbs",
-      "sentPersonsNeeded": 5
+      "contactAddress": "Temple Guardian HQ, 1000'",
+      "contactName": "Bonanza",
+      "sentPersonsNeeded": 25
     },
     {
-      "id": "bbUte6Hug",
-      "sourceGroup": "Temple Guardians",
-      "title": "I have no details",
-      "pitch": "First there will be mass carnage.  AND THEN CAKE",
-      "needStart": "1974-10-25T10:00",
-      "needEnd": "1974-10-25T16:00",
+      "id": "d3_-FW_8a",
       "state": "active",
+      "title": "Help at the Airport",
+      "pitch": "Not flying planes... but everything else!  We have lots of things you can help with.",
+      "sourceGroup": "Airport",
+      "needStart": "2018-08-16T10:00",
+      "needEnd": "2018-08-20T10:00",
+      "contactMethod": "SCHEDULE",
+      "contactAddress": "BRC Airport",
+      "contactName": "Charles Lindbergh",
+      "sentPersonsNeeded": 50
+    },
+    {
+      "id": "kbHc9Xef9",
+      "state": "active",
+      "title": "Some Giant Fuck-Off Art Project",
+      "pitch": "Help staple millions of tiny things to some giant fuck-off thing to make art.",
+      "sourceGroup": "Art Support Services",
+      "needStart": "2018-08-12T20:55",
+      "needEnd": "2018-08-12T21:55",
       "contactMethod": "WALKUP",
-      "contactAddress": "4 & E",
-      "contactName": "Bob Dobbs",
-      "sentPersonsNeeded": 5
+      "contactAddress": "Center Camp",
+      "contactName": "Shanesaw",
+      "sentPersonsNeeded": 30
+    },
+    {
+      "id": "rAFkKyPpB",
+      "state": "active",
+      "title": "Ride a clitoris bike",
+      "pitch": "Some stuff",
+      "sourceGroup": "Clitoral Mass",
+      "needStart": "2018-08-15T12:09",
+      "needEnd": "2018-08-15T13:09",
+      "contactMethod": "SCHEDULE",
+      "contactAddress": "4th and E",
+      "contactName": "Deadpool",
+      "sentPersonsNeeded": 10
     }
   ],
   "users": [],
   "projectDetails": [
     {
-      "id": "2",
-      "projectId": "1",
-      "text": "An Indominatble Will!!!"
+      "id": "EHP8hFXwv",
+      "projectId": "PWAuSiyP3",
+      "text": "A sense of citizenship"
     },
     {
-      "id": "fnUS0ZY7g",
-      "projectId": "1",
-      "text": "Pants"
+      "id": "zVvXEqCi2",
+      "projectId": "PWAuSiyP3",
+      "text": "Ability to walk for an hour or so"
     },
     {
-      "id": "mKIxfOvAwJ",
-      "projectId": "zK3jLOIRF",
-      "text": "An Indominatble Will"
+      "id": "OfJBDaNs9",
+      "projectId": "d3_-FW_8a",
+      "text": "Not flying planes"
     },
     {
-      "id": "HPydRdBhhv",
-      "projectId": "zK3jLOIRF",
-      "text": "Pants"
+      "id": "MqMyyT0f1",
+      "projectId": "d3_-FW_8a",
+      "text": "Administrative stuff"
     },
     {
-      "id": "B_Y5vsgjjX",
-      "projectId": "jY8Y9_n0l",
-      "text": "An Indominatble Will"
+      "id": "l_ULZH8jd",
+      "projectId": "0ICGHjajI",
+      "text": "A laser gun"
     },
     {
-      "id": "zZdaSd2tnj",
-      "projectId": "jY8Y9_n0l",
-      "text": "Pants"
+      "id": "eg38gSkLc",
+      "projectId": "0ICGHjajI",
+      "text": "Fearlessness in the face of evil bug-eyed aliens"
     },
     {
-      "id": "ha_dYBK6B9",
-      "projectId": "jY8Y9_n0l",
-      "text": "saasdadasd"
-    },
-    {
-      "id": "qqEidtaZB",
-      "projectId": "1",
-      "text": "a laser gun"
-    },
-    {
-      "id": "JpytCtTFk",
-      "projectId": "zK3jLOIRF",
-      "text": "The ability to make light of serious shit"
-    },
-    {
-      "id": "D0SseJR6F",
-      "projectId": "1",
-      "text": "eating pie"
-    },
-    {
-      "id": "86xEv5jcw",
-      "projectId": "1",
-      "text": "food"
+      "id": "RZvTQ3eHD",
+      "projectId": "rAFkKyPpB",
+      "text": "A bike"
     }
   ],
   "projectSentPersons": [
     {
-      "id": "0-f-_7UBI",
-      "projectId": "bbUte6Hug",
-      "name": "bob",
+      "id": "A3cpuVGTt",
+      "projectId": "rAFkKyPpB",
+      "name": "Sparklepony",
       "email": "",
-      "state": "noshow",
-      "createdAt": "2018-08-13T01:33:15.788Z"
+      "state": "confirmed",
+      "createdAt": "2018-08-15T19:13:32.499Z"
     },
     {
-      "id": "oCwRiXpLa",
-      "projectId": "bbUte6Hug",
-      "name": "deadpool",
-      "email": "",
-      "state": "sent",
-      "createdAt": "2018-08-13T01:47:15.788Z"
-    },
-    {
-      "id": "lYdtXMuLZ",
-      "projectId": "bbUte6Hug",
-      "name": "test",
+      "id": "TjsRpA-eF",
+      "projectId": "rAFkKyPpB",
+      "name": "Fred",
       "email": "",
       "state": "noshow",
-      "createdAt": "2018-08-13T01:57:15.788Z"
+      "createdAt": "2018-08-15T19:14:52.323Z"
     }
   ]
 }
