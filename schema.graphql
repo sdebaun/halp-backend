@@ -116,5 +116,5 @@ type Mutation {
 type Subscription {
   projectAdded: Project
   projectChanged: Project
-  projectDeleted: Project
+  projectDeleted: String
 }

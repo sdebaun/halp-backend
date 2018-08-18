@@ -2,14 +2,9 @@ import _ from 'lodash'
 import shortid from 'shortid'
 import moment from 'moment'
 import { PubSub } from 'apollo-server'
+import ProjectController from './controllers/project'
 
 const pubsub = new PubSub()
-
-const DEFAULT_SENTPERSON_COUNTS = {
-  sent: 0,
-  confirmed: 0,
-  noshow: 0
-}
 
 const DEFAULT_PROJECT_COUNTS = {
   active: 0,
@@ -21,82 +16,19 @@ const PROJECT_ADDED = 'PROJECT_ADDED'
 const PROJECT_CHANGED = 'PROJECT_CHANGED'
 const PROJECT_DELETED = 'PROJECT_DELETED'
 
-const countsFor = db => project => {
-  const sentPersons = db.get('projectSentPersons')
-    .filter({projectId: project.id}).value();
-  const sentPersonCounts = _.countBy(sentPersons, 'state');
-  return {
-    ...project,
-    sentPersonCounts: {...DEFAULT_SENTPERSON_COUNTS, ...sentPersonCounts}
-  }
-}
-
-const detailsFor = db => project => {
-  const details = db.get('projectDetails')
-    .filter({projectId: project.id}).value();
-  return {
-    ...project,
-    details,
-  }
-}
-
-const scoreFor = db => project => {
-  const sentPersonsScore = sentPercentScore(project)
-  return {
-    ...project,
-    sentPersonsScore
-  }
-}
-
-const sentEquivalentFor = ({sent, confirmed, noshow}) =>
-  (sent * 0.5) + (confirmed * 1.0) + (noshow * 0.25)
-
-const sentPercentScore = ({sentPersonsNeeded, sentPersonCounts}) =>
-  sentEquivalentFor(sentPersonCounts) / sentPersonsNeeded
-
-const projectsByState = (db, state) =>
-  db.get('projects')
-    .filter({state})
-    .sortBy(o => o.needStart)
-    .reverse()
-    .value()
-    .map(countsFor(db))
-    .map(detailsFor(db))
-    .map(scoreFor(db))
-    
 const resolvers = {
   Query: {
     getProject: (parent, {id}, {db}, info) => {
-      const project = db.get('projects').find({id}).value()
-      const sentPersonsAll = db.get('projectSentPersons')
-        .filter({projectId: id})
-        .sortBy(o => o.name)
-      const sentPersonsCount = sentPersonsAll.length
-      const sentPersons = {
-        sent: sentPersonsAll.filter({state: 'sent'}).value(),
-        confirmed: sentPersonsAll.filter({state: 'confirmed'}).value(),
-        noshow: sentPersonsAll.filter({state: 'noshow'}).value()
-      }
-      const sentPersonCounts = _.countBy(sentPersonsAll.value(), 'state')
-      const sentPersonsScore = sentPercentScore({sentPersonsNeeded: project.sentPersonsNeeded, sentPersonCounts})
-      const details = db.get('projectDetails').filter({projectId: id}).value()
-      return {
-        ...project,
-        details,
-        sentPersons,
-        sentPersonsCount,
-        sentPersonsScore,
-        sentPersonCounts: {...DEFAULT_SENTPERSON_COUNTS, ...sentPersonCounts},
-      }
+      return ProjectController.get(db, id)
     },
     projectsAll: (parent, args, {db}, info) => {
-      return db.get('projects').value()
+      return ProjectController.all(db)
     },
     projectsActive: (parent, args, {db}, info) => {
-      return projectsByState(db, 'active')
+      return ProjectController.byState(db, 'active')
     },
     projectsByState: (parent, {state}, {db}, info) => {
-      return projectsByState(db, state)
+      return ProjectController.byState(db, state)
     },
     projectCounts: (parent, args, {db}, info) => {
       const projects = db.get('projects').value()
@@ -106,47 +38,27 @@ const resolvers = {
   },
   Mutation: {
     createProject: (parent, args, {db}, info) => {
-      const id = shortid.generate()
-      db.get('projects')
-        .push({id, state: 'active', ...args})
-        .write()
-      const project = db.get('projects').find({id}).value()
+      const id = ProjectController.create(db, args)
+      const project = ProjectController.get(db, id)
       pubsub.publish(PROJECT_ADDED, { projectAdded: project })
       return project
     },
     copyProject: (parent, {id}, {db}, info) => {
-      const project = db.get('projects').find({id}).value()
-      const details = db.get('projectDetails').filter({projectId: id}).value()
-      const newId = shortid.generate()
-      db.get('projects')
-        .push({...project, title: `Copy of ${project.title}`, id: newId, state: 'active'})
-        .write()
-      details.forEach(detail => {
-        const newDetailId = shortid.generate()
-        db.get('projectDetails')
-          .push({...detail, id: newDetailId, projectId: newId})
-          .write()
-      });
-      return db.get('projects').find({id: newId}).value()
+      const newId = ProjectController.copy(db, id)
+      const project = ProjectController.get(db, newId)
+      pubsub.publish(PROJECT_ADDED, { projectAdded: project })
+      return project
     },
     deleteProject: (parent, {id}, {db}, info) => {
-      db.get('projects')
-        .remove({id})
-        .write()
-      db.get('projectDetails')
-        .remove({projectId: id})
-        .write()
-      db.get('projectSentPersons')
-        .remove({projectId: id})
-        .write()
+      ProjectController.del(db, id)
+      pubsub.publish(PROJECT_DELETED, {projectDeleted: id})
       return id
     },
     updateProject: (parent, args, {db}, info) => {
-      db.get('projects')
-        .find({id: args.id})
-        .assign(args)
-        .write()
-        return db.get('projects').find({id: args.id}).value()
+      const id = ProjectController.update(db, args)
+      const project = ProjectController.get(db, id)
+      pubsub.publish(PROJECT_CHANGED, {projectChanged: project})
+      return project
     },
     addProjectDetail: (parent, args, {db}, info) => {
       const id = shortid.generate()
@@ -192,6 +104,12 @@ const resolvers = {
   Subscription: {
     projectAdded: {
       subscribe: () => pubsub.asyncIterator([PROJECT_ADDED])
+    },
+    projectChanged: {
+      subscribe: () => pubsub.asyncIterator([PROJECT_CHANGED])
+    },
+    projectDeleted: {
+      subscribe: () => pubsub.asyncIterator([PROJECT_DELETED])
     }
   }
 }
