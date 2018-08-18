@@ -1,6 +1,11 @@
 import _ from 'lodash'
 import shortid from 'shortid'
-// import moment from 'moment'
+
+const DEFAULT_PROJECT_COUNTS = {
+  active: 0,
+  closed: 0,
+  old: 0,
+}
 
 const DEFAULT_SENTPERSON_COUNTS = {
   sent: 0,
@@ -77,6 +82,12 @@ const byState = (db, state) =>
     .map(detailsFor(db))
     .map(scoreFor(db))
 
+const counts = (db) => {
+  const projects = db.get('projects').value()
+  const counts = _.countBy(projects, 'state')
+  return {...DEFAULT_PROJECT_COUNTS, ...counts}
+}
+
 const create = (db, args) => {
   const id = shortid.generate()
   db.get('projects')
@@ -126,6 +137,7 @@ export default {
   get,
   byState,
   all,
+  counts,
   create,
   copy,
   update,

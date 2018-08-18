@@ -1,18 +1,10 @@
-import _ from 'lodash'
-import shortid from 'shortid'
-import moment from 'moment'
+// import _ from 'lodash'
 import { PubSub } from 'apollo-server'
 import ProjectController from './controllers/project'
 import ProjectDetailController from './controllers/projectDetail'
 import ProjectSentPersonController from './controllers/projectSentPerson'
 
 const pubsub = new PubSub()
-
-const DEFAULT_PROJECT_COUNTS = {
-  active: 0,
-  closed: 0,
-  old: 0,
-}
 
 const PROJECT_ADDED = 'PROJECT_ADDED'
 const PROJECT_CHANGED = 'PROJECT_CHANGED'
@@ -39,9 +31,7 @@ const resolvers = {
       return ProjectController.byState(db, state)
     },
     projectCounts: (parent, args, {db}, info) => {
-      const projects = db.get('projects').value()
-      const counts = _.countBy(projects, 'state')
-      return {...DEFAULT_PROJECT_COUNTS, ...counts}
+      return ProjectController.counts(db)
     }
   },
   Mutation: {
