@@ -1,5 +1,5 @@
 import express from 'express';
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server';
 
 import typeDefs from './typeDefs';
 import resolvers from './resolvers';
@@ -19,9 +19,10 @@ const server = new ApolloServer({
     return e
   }
 })
-server.applyMiddleware({app})
 
-app.listen({port: 4000}, () => {
-  console.log(`Server running on http://localhost:4000${server.graphqlPath}`)
+server.listen({port: 4000}).then(({url, subscriptionsUrl}) => {
+  console.log(`Server running on ${url}`)
+  console.log(`Graphql Playground running on ${url}graphql`)
+  console.log(`Subscriptions running on ${subscriptionsUrl}`)
 })
 

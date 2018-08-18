@@ -112,3 +112,9 @@ type Mutation {
 
   updateProjectSentPerson(id: String!, state: String!): SentPerson
 }
+
+type Subscription {
+  projectAdded: Project
+  projectChanged: Project
+  projectDeleted: Project
+}

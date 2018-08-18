@@ -1,6 +1,9 @@
 import _ from 'lodash'
 import shortid from 'shortid'
 import moment from 'moment'
+import { PubSub } from 'apollo-server'
+
+const pubsub = new PubSub()
 
 const DEFAULT_SENTPERSON_COUNTS = {
   sent: 0,
@@ -13,6 +16,10 @@ const DEFAULT_PROJECT_COUNTS = {
   closed: 0,
   old: 0,
 }
+
+const PROJECT_ADDED = 'PROJECT_ADDED'
+const PROJECT_CHANGED = 'PROJECT_CHANGED'
+const PROJECT_DELETED = 'PROJECT_DELETED'
 
 const countsFor = db => project => {
   const sentPersons = db.get('projectSentPersons')
@@ -103,7 +110,9 @@ const resolvers = {
       db.get('projects')
         .push({id, state: 'active', ...args})
         .write()
-      return db.get('projects').find({id}).value()
+      const project = db.get('projects').find({id}).value()
+      pubsub.publish(PROJECT_ADDED, { projectAdded: project })
+      return project
     },
     copyProject: (parent, {id}, {db}, info) => {
       const project = db.get('projects').find({id}).value()
@@ -179,6 +188,11 @@ const resolvers = {
         .write()
       return db.get('projectSentPersons').find({id}).value()
     },
+  },
+  Subscription: {
+    projectAdded: {
+      subscribe: () => pubsub.asyncIterator([PROJECT_ADDED])
+    }
   }
 }
 
