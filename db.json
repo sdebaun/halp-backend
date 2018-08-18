@@ -66,56 +66,17 @@
       "sentPersonsNeeded": 10
     },
     {
-      "id": "Du8LlbeAJ",
-      "state": "active",
-      "title": "testq",
-      "pitch": "adfasdfasdf",
-      "sourceGroup": "test",
-      "needStart": "2018-08-18T09:02",
-      "needEnd": "2018-08-18T10:02",
-      "contactMethod": "SCHEDULE",
-      "contactAddress": "174 East Ramona Street",
-      "contactName": "Stephen DeBaun",
-      "sentPersonsNeeded": 10
-    },
-    {
       "id": "qXxMShr9T",
       "state": "active",
-      "title": "asdfsdf",
+      "title": "asdfsdf!!!",
       "pitch": "asdfadsf",
-      "sourceGroup": "asdfsdf",
+      "sourceGroup": "asdfsdf!!!!",
       "needStart": "2018-08-18T09:13",
       "needEnd": "2018-08-18T10:13",
       "contactMethod": "SCHEDULE",
       "contactAddress": "adsfdf",
       "contactName": "asdfasdf",
       "sentPersonsNeeded": 132
-    },
-    {
-      "id": "UEls7RhGx",
-      "state": "active",
-      "title": "asdfasdfs",
-      "pitch": "asdfasdf",
-      "sourceGroup": "asdfasdf!!!!",
-      "needStart": "2018-08-18T09:20",
-      "needEnd": "2018-08-18T10:20",
-      "contactMethod": "SCHEDULE",
-      "contactAddress": "asdfasdf",
-      "contactName": "asdf",
-      "sentPersonsNeeded": 10
-    },
-    {
-      "id": "pPxj3eO4H",
-      "state": "active",
-      "title": "fdsfdf",
-      "pitch": "asdfasdf",
-      "sourceGroup": "fasdfasdf",
-      "needStart": "2018-08-18T09:25",
-      "needEnd": "2018-08-18T10:25",
-      "contactMethod": "WALKUP",
-      "contactAddress": "asdfasdf",
-      "contactName": "asdf",
-      "sentPersonsNeeded": 99
     }
   ],
   "users": [],
@@ -154,6 +115,11 @@
       "id": "RZvTQ3eHD",
       "projectId": "rAFkKyPpB",
       "text": "A bike"
+    },
+    {
+      "id": "n-OLS1LDO",
+      "projectId": "qXxMShr9T",
+      "text": "foo!!!"
     }
   ],
   "projectSentPersons": [

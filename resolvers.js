@@ -3,6 +3,7 @@ import shortid from 'shortid'
 import moment from 'moment'
 import { PubSub } from 'apollo-server'
 import ProjectController from './controllers/project'
+import ProjectDetailController from './controllers/projectDetail'
 
 const pubsub = new PubSub()
 
@@ -60,26 +61,29 @@ const resolvers = {
       pubsub.publish(PROJECT_CHANGED, {projectChanged: project})
       return project
     },
+
     addProjectDetail: (parent, args, {db}, info) => {
-      const id = shortid.generate()
-      db.get('projectDetails')
-        .push({id, ...args})
-        .write()
-      return db.get('projectDetails').find({id}).value()
+      const id = ProjectDetailController.create(db, args)
+      const project = ProjectController.get(db, args.projectId)
+      const projectDetail = ProjectDetailController.get(db, id)
+      pubsub.publish(PROJECT_CHANGED, {projectChanged: project})
+      return projectDetail
     },
     deleteProjectDetail: (parent, {id}, {db}, info) => {
-      db.get('projectDetails')
-        .remove({id})
-        .write()
+      const projectDetail = ProjectDetailController.get(db, id)
+      ProjectDetailController.del(db, id)
+      const project = ProjectController.get(db, projectDetail.projectId)
+      pubsub.publish(PROJECT_CHANGED, {projectChanged: project})
       return id
     },
     updateProjectDetail: (parent, args, {db}, info) => {
-      db.get('projectDetails')
-        .find({id: args.id})
-        .assign(args)
-        .write()
-        return db.get('projectDetails').find({id: args.id}).value()
+      ProjectDetailController.update(db, args)
+      const projectDetail = ProjectDetailController.get(db, args.id)
+      const project = ProjectController.get(db, projectDetail.projectId)
+      pubsub.publish(PROJECT_CHANGED, {projectChanged: project})
+      return projectDetail
     },
+    
     addProjectSentPerson: (parent, args, {db}, info) => {
       const id = shortid.generate()
       db.get('projectSentPersons')
