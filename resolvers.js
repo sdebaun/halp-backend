@@ -4,6 +4,7 @@ import moment from 'moment'
 import { PubSub } from 'apollo-server'
 import ProjectController from './controllers/project'
 import ProjectDetailController from './controllers/projectDetail'
+import ProjectSentPersonController from './controllers/projectSentPerson'
 
 const pubsub = new PubSub()
 
@@ -16,6 +17,12 @@ const DEFAULT_PROJECT_COUNTS = {
 const PROJECT_ADDED = 'PROJECT_ADDED'
 const PROJECT_CHANGED = 'PROJECT_CHANGED'
 const PROJECT_DELETED = 'PROJECT_DELETED'
+
+const pushProjectChanged = (db, id) => {
+  const projectChanged = ProjectController.get(db, id)
+  pubsub.publish(PROJECT_CHANGED, {projectChanged})
+  return projectChanged
+}
 
 const resolvers = {
   Query: {
@@ -57,52 +64,46 @@ const resolvers = {
     },
     updateProject: (parent, args, {db}, info) => {
       const id = ProjectController.update(db, args)
-      const project = ProjectController.get(db, id)
-      pubsub.publish(PROJECT_CHANGED, {projectChanged: project})
+      const project = pushProjectChanged(db, id)
       return project
     },
 
     addProjectDetail: (parent, args, {db}, info) => {
       const id = ProjectDetailController.create(db, args)
-      const project = ProjectController.get(db, args.projectId)
       const projectDetail = ProjectDetailController.get(db, id)
-      pubsub.publish(PROJECT_CHANGED, {projectChanged: project})
+      pushProjectChanged(db, args.projectId)
       return projectDetail
     },
     deleteProjectDetail: (parent, {id}, {db}, info) => {
       const projectDetail = ProjectDetailController.get(db, id)
       ProjectDetailController.del(db, id)
-      const project = ProjectController.get(db, projectDetail.projectId)
-      pubsub.publish(PROJECT_CHANGED, {projectChanged: project})
+      pushProjectChanged(db, projectDetail.projectId)
       return id
     },
     updateProjectDetail: (parent, args, {db}, info) => {
       ProjectDetailController.update(db, args)
       const projectDetail = ProjectDetailController.get(db, args.id)
-      const project = ProjectController.get(db, projectDetail.projectId)
-      pubsub.publish(PROJECT_CHANGED, {projectChanged: project})
+      pushProjectChanged(db, projectDetail.projectId)
       return projectDetail
     },
-    
+
     addProjectSentPerson: (parent, args, {db}, info) => {
-      const id = shortid.generate()
-      db.get('projectSentPersons')
-        .push({id, ...args, createdAt: moment()})
-        .write()
-      return db.get('projectSentPersons').find({id}).value()
+      const id = ProjectSentPersonController.create(db, args)
+      const projectSentPerson = ProjectSentPersonController.get(db, id)
+      pushProjectChanged(db, args.projectId)
+      return projectSentPerson
     },
     deleteProjectSentPerson: (parent, {id}, {db}, info) => {
-      db.get('projectSentPersons')
-        .remove({id})
-        .write()
+      const projectSentPerson = ProjectSentPersonController.get(db, id)
+      ProjectSentPersonController.del(db, id)
+      pushProjectChanged(db, projectSentPerson.projectId)
       return id
     },
-    updateProjectSentPerson: (parent, {id, state}, {db}, info) => {
-      db.get('projectSentPersons')
-        .find({id})
-        .assign({state})
-        .write()
-      return db.get('projectSentPersons').find({id}).value()
+    updateProjectSentPerson: (parent, args, {db}, info) => {
+      ProjectSentPersonController.update(db, args)
+      const projectSentPerson = ProjectSentPersonController.get(db, args.id)
+      pushProjectChanged(db, projectSentPerson.projectId)
+      return projectSentPerson
     },
   },
   Subscription: {
