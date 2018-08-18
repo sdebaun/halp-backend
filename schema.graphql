@@ -117,4 +117,5 @@ type Subscription {
   projectAdded: Project
   projectChanged: Project
   projectDeleted: String
+  projectCountsChanged: ProjectCounts
 }

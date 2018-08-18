@@ -1,4 +1,3 @@
-// import _ from 'lodash'
 import { PubSub } from 'apollo-server'
 import ProjectController from './controllers/project'
 import ProjectDetailController from './controllers/projectDetail'
@@ -9,6 +8,7 @@ const pubsub = new PubSub()
 const PROJECT_ADDED = 'PROJECT_ADDED'
 const PROJECT_CHANGED = 'PROJECT_CHANGED'
 const PROJECT_DELETED = 'PROJECT_DELETED'
+const PROJECTCOUNTS_CHANGED = 'PROJECTCOUNTS_CHANGED'
 
 const pushProjectChanged = (db, id) => {
   const projectChanged = ProjectController.get(db, id)
@@ -39,22 +39,30 @@ const resolvers = {
       const id = ProjectController.create(db, args)
       const project = ProjectController.get(db, id)
       pubsub.publish(PROJECT_ADDED, { projectAdded: project })
+      const counts = ProjectController.counts(db)
+      pubsub.publish(PROJECTCOUNTS_CHANGED, { projectCountsChanged: counts })
       return project
     },
     copyProject: (parent, {id}, {db}, info) => {
       const newId = ProjectController.copy(db, id)
       const project = ProjectController.get(db, newId)
       pubsub.publish(PROJECT_ADDED, { projectAdded: project })
+      const counts = ProjectController.counts(db)
+      pubsub.publish(PROJECTCOUNTS_CHANGED, { projectCountsChanged: counts })
       return project
     },
     deleteProject: (parent, {id}, {db}, info) => {
       ProjectController.del(db, id)
       pubsub.publish(PROJECT_DELETED, {projectDeleted: id})
+      const counts = ProjectController.counts(db)
+      pubsub.publish(PROJECTCOUNTS_CHANGED, { projectCountsChanged: counts })
       return id
     },
     updateProject: (parent, args, {db}, info) => {
       const id = ProjectController.update(db, args)
       const project = pushProjectChanged(db, id)
+      const counts = ProjectController.counts(db)
+      pubsub.publish(PROJECTCOUNTS_CHANGED, { projectCountsChanged: counts })
       return project
     },
 
@@ -105,6 +113,9 @@ const resolvers = {
     },
     projectDeleted: {
       subscribe: () => pubsub.asyncIterator([PROJECT_DELETED])
+    },
+    projectCountsChanged: {
+      subscribe: () => pubsub.asyncIterator([PROJECTCOUNTS_CHANGED])
     }
   }
 }

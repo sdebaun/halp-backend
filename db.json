@@ -27,19 +27,6 @@
       "sentPersonsNeeded": 25
     },
     {
-      "id": "d3_-FW_8a",
-      "state": "active",
-      "title": "Help at the Airport",
-      "pitch": "Not flying planes... but everything else!  We have lots of things you can help with.",
-      "sourceGroup": "Airport",
-      "needStart": "2018-08-16T10:00",
-      "needEnd": "2018-08-20T10:00",
-      "contactMethod": "SCHEDULE",
-      "contactAddress": "BRC Airport",
-      "contactName": "Charles Lindbergh",
-      "sentPersonsNeeded": 50
-    },
-    {
       "id": "kbHc9Xef9",
       "state": "active",
       "title": "Some Giant Fuck-Off Art Project",
@@ -66,17 +53,43 @@
       "sentPersonsNeeded": 10
     },
     {
-      "id": "qXxMShr9T",
+      "id": "Fpq2VaHFe",
       "state": "active",
-      "title": "asdfsdf!!!fffffffqqqq",
-      "pitch": "asdfadsf",
-      "sourceGroup": "asdfsdf!!!!",
-      "needStart": "2018-08-18T09:13",
-      "needEnd": "2018-08-18T10:13",
-      "contactMethod": "SCHEDULE",
-      "contactAddress": "adsfdf",
-      "contactName": "asdfasdf",
-      "sentPersonsNeeded": 132
+      "title": "New project",
+      "pitch": "This is the pitch",
+      "sourceGroup": "source",
+      "needStart": "",
+      "needEnd": "",
+      "contactMethod": "WALKUP",
+      "contactAddress": "addy",
+      "contactName": "contact name",
+      "sentPersonsNeeded": 42
+    },
+    {
+      "id": "VnPokXzk0",
+      "state": "active",
+      "title": "New project",
+      "pitch": "This is the pitch",
+      "sourceGroup": "source",
+      "needStart": "",
+      "needEnd": "",
+      "contactMethod": "WALKUP",
+      "contactAddress": "addy",
+      "contactName": "contact name",
+      "sentPersonsNeeded": 42
+    },
+    {
+      "id": "H2UVCx740",
+      "state": "active",
+      "title": "New project",
+      "pitch": "This is the pitch",
+      "sourceGroup": "source",
+      "needStart": "",
+      "needEnd": "",
+      "contactMethod": "WALKUP",
+      "contactAddress": "addy",
+      "contactName": "contact name",
+      "sentPersonsNeeded": 42
     }
   ],
   "users": [],
@@ -92,16 +105,6 @@
       "text": "Ability to walk for an hour or so"
     },
     {
-      "id": "OfJBDaNs9",
-      "projectId": "d3_-FW_8a",
-      "text": "Not flying planes"
-    },
-    {
-      "id": "MqMyyT0f1",
-      "projectId": "d3_-FW_8a",
-      "text": "Administrative stuff"
-    },
-    {
       "id": "l_ULZH8jd",
       "projectId": "0ICGHjajI",
       "text": "A laser gun"
@@ -115,11 +118,6 @@
       "id": "RZvTQ3eHD",
       "projectId": "rAFkKyPpB",
       "text": "A bike"
-    },
-    {
-      "id": "uflX_8_G3",
-      "projectId": "qXxMShr9T",
-      "text": "aaaa!!!"
     }
   ],
   "projectSentPersons": [
@@ -138,22 +136,6 @@
       "email": "",
       "state": "noshow",
       "createdAt": "2018-08-15T19:14:52.323Z"
-    },
-    {
-      "id": "3jS4WuRJu",
-      "projectId": "qXxMShr9T",
-      "name": "asdfasdfsffdsfsff",
-      "email": "",
-      "state": "confirmed",
-      "createdAt": "2018-08-18T17:20:09.974Z"
-    },
-    {
-      "id": "G3dFgZTLp",
-      "projectId": "qXxMShr9T",
-      "name": "fffff",
-      "email": "",
-      "state": "confirmed",
-      "createdAt": "2018-08-18T17:20:21.308Z"
     }
   ]
 }
