@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --ignore db.json --ext js,graphql --exec babel-node index.js"
+    "start": "nodemon --ignore db.json --ext js,graphql --exec babel-node src/index.js",
+    "build": "babel src --out-dir build --copy-files",
+    "start:production": "node build/index.js"
   },
   "dependencies": {
     "apollo-server": "^2.0.4",
@@ -20,6 +22,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-3": "^6.24.1",
     "nodemon": "^1.18.3"
