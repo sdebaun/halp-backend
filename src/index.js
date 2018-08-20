@@ -11,6 +11,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context,
+  introspection: true,
   formatResponse: r => {
     console.log(JSON.stringify(r, null, 2))
     return r
