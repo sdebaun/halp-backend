@@ -1,0 +1,6 @@
+# HALP
+
+I need somebody.  Not just anybody.  You know I need someone.  HALP!
+
+Stand-alone ad-hoc project dispatch app.
+
