@@ -2,7 +2,7 @@ import { PubSub } from 'apollo-server'
 import ProjectController from './controllers/project'
 import ProjectDetailController from './controllers/projectDetail'
 import ProjectSentPersonController from './controllers/projectSentPerson'
-import ProjectPerkController from './controllers/projectDetail'
+import ProjectPerkController from './controllers/projectPerk'
 
 const pubsub = new PubSub()
 

@@ -109,6 +109,7 @@ const update = (db, args) => {
 const copy = (db, id) => {
   const project = db.get('projects').find({id}).value()
   const details = db.get('projectDetails').filter({projectId: id}).value()
+  const perks = db.get('projectPerks').filter({projectId: id}).value()
   const newId = shortid.generate()
   db.get('projects')
     .push({...project, title: `Copy of ${project.title}`, id: newId, state: 'active'})
@@ -117,6 +118,12 @@ const copy = (db, id) => {
     const newDetailId = shortid.generate()
     db.get('projectDetails')
       .push({...detail, id: newDetailId, projectId: newId})
+      .write()
+  });
+  perks.forEach(perk => {
+    const newPerkId = shortid.generate()
+    db.get('projectPerks')
+      .push({...perk, id: newPerkId, projectId: newId})
       .write()
   });
   return newId

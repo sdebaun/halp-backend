@@ -51,6 +51,19 @@
       "contactAddress": "4th and E",
       "contactName": "Deadpool",
       "sentPersonsNeeded": 10
+    },
+    {
+      "id": "cLKxjGBdt",
+      "state": "active",
+      "title": "Copy of Light the Lamps",
+      "pitch": "Come out with all us hoopy froods in a ceremony of illumination.",
+      "sourceGroup": "Lamplighters",
+      "needStart": "2018-08-15T18:00",
+      "needEnd": "2018-08-15T20:00",
+      "contactMethod": "WALKUP",
+      "contactAddress": "Lamplighters HQ 4th and E",
+      "contactName": "Snotto",
+      "sentPersonsNeeded": 200
     }
   ],
   "users": [],
@@ -79,6 +92,16 @@
       "id": "RZvTQ3eHD",
       "projectId": "rAFkKyPpB",
       "text": "A bike"
+    },
+    {
+      "id": "BqdK2MAJiW",
+      "projectId": "cLKxjGBdt",
+      "text": "A sense of citizenship"
+    },
+    {
+      "id": "UNKdzOmIe8",
+      "projectId": "cLKxjGBdt",
+      "text": "Ability to walk for an hour or so"
     }
   ],
   "projectSentPersons": [
@@ -120,6 +143,21 @@
       "id": "xxxxxxx",
       "projectId": "PWAuSiyP3",
       "text": "we get you drunk as fuck"
+    },
+    {
+      "id": "YJRUyf5rE",
+      "projectId": "PWAuSiyP3",
+      "text": "we sex up your mom"
+    },
+    {
+      "id": "KHKGZ3vcz7",
+      "projectId": "cLKxjGBdt",
+      "text": "we get you drunk as fuck"
+    },
+    {
+      "id": "NtsjYW7CER",
+      "projectId": "cLKxjGBdt",
+      "text": "we sex up your mom"
     }
   ]
 }
