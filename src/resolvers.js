@@ -2,6 +2,7 @@ import { PubSub } from 'apollo-server'
 import ProjectController from './controllers/project'
 import ProjectDetailController from './controllers/projectDetail'
 import ProjectSentPersonController from './controllers/projectSentPerson'
+import ProjectPerkController from './controllers/projectDetail'
 
 const pubsub = new PubSub()
 
@@ -83,6 +84,25 @@ const resolvers = {
       const projectDetail = ProjectDetailController.get(db, args.id)
       pushProjectChanged(db, projectDetail.projectId)
       return projectDetail
+    },
+
+    addProjectPerk: (parent, args, {db}, info) => {
+      const id = ProjectPerkController.create(db, args)
+      const projectPerk = ProjectPerkController.get(db, id)
+      pushProjectChanged(db, args.projectId)
+      return projectPerk
+    },
+    deleteProjectPerk: (parent, {id}, {db}, info) => {
+      const projectPerk = ProjectPerkController.get(db, id)
+      ProjectPerkController.del(db, id)
+      pushProjectChanged(db, projectPerk.projectId)
+      return id
+    },
+    updateProjectDetail: (parent, args, {db}, info) => {
+      ProjectPerkController.update(db, args)
+      const projectPerk = ProjectPerkController.get(db, args.id)
+      pushProjectChanged(db, projectPerk.projectId)
+      return projectPerk
     },
 
     addProjectSentPerson: (parent, args, {db}, info) => {

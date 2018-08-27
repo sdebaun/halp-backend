@@ -3,6 +3,11 @@ type Detail {
   text: String!
 }
 
+type Perk {
+  id: String!
+  text: String!
+}
+
 enum SentPersonState {
   sent
   confirmed
@@ -47,6 +52,7 @@ type Project {
   contactAddress: String!
   contactName: String!
   details: [Detail]
+  perks: [Perk]
   sentPersons: SentPersonLists!
   sentPersonsNeeded: Int
   sentPersonCounts: SentPersonsCounts!
@@ -106,6 +112,12 @@ type Mutation {
 
   updateProjectDetail(id: String!, text: String!): Detail
 
+  addProjectPerk(projectId: String!, text: String!): Perk
+
+  deleteProjectPerk(id: String!): String
+
+  updateProjectPerk(id: String!, text: String!): Perk
+  
   addProjectSentPerson(projectId: String!, name: String!, email: String, state: String): SentPerson
 
   deleteProjectSentPerson(id: String!): String

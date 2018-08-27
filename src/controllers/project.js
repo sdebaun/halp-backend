@@ -60,9 +60,11 @@ const get = (db, id) => {
   const sentPersonCounts = _.countBy(sentPersonsAll.value(), 'state')
   const sentPersonsScore = sentPercentScore({sentPersonsNeeded: project.sentPersonsNeeded, sentPersonCounts})
   const details = db.get('projectDetails').filter({projectId: id}).value()
+  const perks = db.get('projectPerks').filter({projectId: id}).value()
   return {
     ...project,
     details,
+    perks,
     sentPersons,
     sentPersonsCount,
     sentPersonsScore,
