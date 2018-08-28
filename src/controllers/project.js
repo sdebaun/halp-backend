@@ -32,6 +32,15 @@ const detailsFor = db => project => {
   }
 }
 
+const perksFor = db => project => {
+  const perks = db.get('projectPerks')
+    .filter({projectId: project.id}).value();
+  return {
+    ...project,
+    perks,
+  }
+}
+
 const scoreFor = db => project => {
   const sentPersonsScore = sentPercentScore(project)
   return {
@@ -82,6 +91,7 @@ const byState = (db, state) =>
     .value()
     .map(countsFor(db))
     .map(detailsFor(db))
+    .map(perksFor(db))
     .map(scoreFor(db))
 
 const counts = (db) => {
@@ -134,6 +144,9 @@ const del = (db, id) => {
     .remove({id})
     .write()
   db.get('projectDetails')
+    .remove({projectId: id})
+    .write()
+  db.get('projectPerks')
     .remove({projectId: id})
     .write()
   db.get('projectSentPersons')
